@@ -1,0 +1,19 @@
+          .inactive-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+          }
+          .active-card {
+            box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+          }
+
+          .hourly-details-card {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+.hourly-details-card.show {
+  max-height: 500px; /* ose sa të duash, mjafton të mbulojë përmbajtjen */
+  opacity: 1;
+}
