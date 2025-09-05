@@ -15,17 +15,13 @@ function Result({ weather }) {
 
       <div className="max-temp">
         <p className="celsius">{current.temperature}°</p>
-        <img
-          src={`https://s.w-x.co/staticmaps/wu/icons/${current.iconCode}.png`}
-          alt="image weather"
-          className="image"
-        />
+
         <img
           src="https://img.icons8.com/ios-filled/50/000000/wind.png"
           alt="wind icon"
           style={{ width: "24px", height: "24px", marginRight: "6px" }}
         />
-        <p className="mb-0">
+        <p className="mb-1">
           <strong>Wind Speed:</strong> {current.windSpeed} km/h
         </p>
       </div>

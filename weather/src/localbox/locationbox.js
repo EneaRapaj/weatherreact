@@ -21,8 +21,8 @@ function LocationBox({ city, country, weather, current }) {
         onDayClick={(day) => setSelectedDay(day)} 
       />
 
-      {/* Hourly shfaq orët sipas ditës së zgjedhur */}
-      <Hourly weather={weather} selectedDay={selectedDay} />
+      <Hourly weather={weather} selectedDay={selectedDay}  />
+
 
       <FirstConatainer weather={weather}  />
       <Result weather={weather} />
