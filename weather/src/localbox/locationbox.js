@@ -5,9 +5,9 @@ import FirstConatainer from '../localbox/firstcontainer.js';
 import Result from '../localbox/result.js';
 import Setting from '../localbox/setting.js';
 
-function LocationBox({ city, country, weather, current }) {
-  const [selectedDay, setSelectedDay] = useState("Today"); // dita e klikuar, default Today
-   
+function LocationBox({ city, country, weather, onChangeBackground }) {
+  const [selectedDay, setSelectedDay] = useState("Today"); 
+
   return (
     <div className="location-box">
       <div className="location">
@@ -15,18 +15,17 @@ function LocationBox({ city, country, weather, current }) {
       </div>
       <div className="date">{new Date().toDateString()}</div>
 
-      {/* SimpleWeather merr onDayClick për të përcjellë dita e klikuar */}
       <SimpleWeather 
         weather={weather} 
-        onDayClick={(day) => setSelectedDay(day)} 
+        onDayClick={(day, narrative) => {
+          setSelectedDay(day);
+          if (onChangeBackground) onChangeBackground(narrative);
+        }} 
       />
 
-      <Hourly weather={weather} selectedDay={selectedDay}  />
-
-
-      <FirstConatainer weather={weather}  />
+      <Hourly weather={weather} selectedDay={selectedDay} />
+      <FirstConatainer weather={weather} />
       <Result weather={weather} />
-
       <Setting />
     </div>
   );
