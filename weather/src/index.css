@@ -280,3 +280,7 @@ align-items: flex-end;
 gap: 200px;
 }
 
+/* Shto pak padding te elementi prind që dropdown-et të mos preken nga fundi */
+body, .App {
+  padding-bottom: 100px; /* Lartësia e navbar-it + hapësirë për dropdown */
+}

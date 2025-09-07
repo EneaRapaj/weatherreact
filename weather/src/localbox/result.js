@@ -1,5 +1,5 @@
 import React from "react";
-
+import "./result.css"
 function Result({ weather }) {
   if (!weather) return null;
 
@@ -48,6 +48,7 @@ function Result({ weather }) {
           <div className="Lat-Lon">
             <div className="Lat">
               <p>(Lat: {locationPoint?.location?.latitude })</p>
+              <p>Long: {locationPoint?.location?.longitude}</p>
             </div>
             <div>
               <p>Long: {locationPoint?.location?.longitude}</p>

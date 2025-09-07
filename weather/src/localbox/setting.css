@@ -1,0 +1,21 @@
+/* Navbar i fikusuar në fund */
+.navi {
+  position: fixed;          /* Fikson navbar-in në fund */
+  bottom: 0;
+  width: 100%;              /* Mbush të gjithë gjerësinë */
+  z-index: 1000;            /* Për navbar */
+  overflow: visible;        /* Lejon dropdown-et të dalin jashtë navbar-it */
+  background-color: #f8f9fa;
+  padding: 10px 20px;
+  box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+}
+
+/* Dropdown-et hapen mbi navbar, jo poshtë */
+.navi .dropdown-menu {
+  top: auto;           /* heq top default */
+  bottom: 100%;        /* vendos dropdown-in mbi navbar */
+  left: 0;
+  right: auto;
+  margin-bottom: 0;
+  z-index: 1050;       /* mbi navbar dhe çdo përmbajtje tjetër */
+}

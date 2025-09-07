@@ -54,7 +54,7 @@ const getWeatherIconFromNarrative = (narrative) => {
   return iconMap.nodata;
 };
 
-function SimpleWeather({ weather, onDayClick }) {
+function SimpleWeather({ weather, onDayClick, tempUnit = '°C', windUnit = 'kilometer/hour' }) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   if (!weather) return <p className="px-3">Zgjidh një qytet për të parë motin</p>;
@@ -70,15 +70,17 @@ function SimpleWeather({ weather, onDayClick }) {
       max: current.temperatureMax24Hour,
       min: current.temperatureMin24Hour,
       narrative: current.cloudCoverPhrase || "No data",
+      windSpeed: current.windSpeed, // mund të përdoret më vonë
     },
     ...(forecast
-      ? forecast.dayOfWeek.slice(1, 10).map((d, i) => ({
+      ? forecast.dayOfWeek.slice(1, 11).map((d, i) => ({
           dayOfWeek: d,
           iconCode: null,
           isNight: false,
           max: forecast.calendarDayTemperatureMax[i],
           min: forecast.calendarDayTemperatureMin[i],
           narrative: forecast.narrative[i] || "No data",
+          windSpeed: forecast.windSpeed?.[i] || "-",
         }))
       : []),
   ];
@@ -88,7 +90,16 @@ function SimpleWeather({ weather, onDayClick }) {
       <div className="d-flex flex-row flex-nowrap gap-3 overflow-auto">
         {allDays.map((day, i) => {
           const isActive = i === activeIndex;
-          const iconSrc = day.iconCode != null ? nodataIcon : getWeatherIconFromNarrative(day.narrative);
+
+          // Marr ikonën sipas narrative
+          const iconSrc = getWeatherIconFromNarrative(day.narrative);
+
+          // Konvertimi i temperaturës
+          const displayMax = tempUnit === '°C' ? day.max : Math.round((day.max * 9/5) + 32);
+          const displayMin = day.min != null ? (tempUnit === '°C' ? day.min : Math.round((day.min * 9/5) + 32)) : null;
+
+          // Konvertimi i shpejtësisë së erës
+          const displayWind = windUnit === 'kilometer/hour' ? day.windSpeed : Math.round(day.windSpeed / 1.609);
 
           return (
             <Card
@@ -117,12 +128,18 @@ function SimpleWeather({ weather, onDayClick }) {
               <div className="p-3 d-flex justify-content-between align-items-start">
                 <div className="d-flex flex-column align-items-center">
                   <span className="fw-bold fs-5 mb-2">{day.dayOfWeek}</span>
+
+                  {/* Imazhi i motit */}
                   <img src={iconSrc} alt="weather icon" style={{ width: 50, height: 50 }} className="mb-2" />
+
                   <div className="temperature mb-1">
-                    <span className="fs-5 fw-bold">{day.max}°C</span>
-                    <span className="text-muted ms-1">{day.min != null ? `${day.min}°C` : null}</span>
+                    <span className="fs-5 fw-bold">{displayMax}{tempUnit}</span>
+                    <span className="text-muted ms-1">{displayMin != null ? `${displayMin}${tempUnit}` : null}</span>
                   </div>
+
+   
                 </div>
+
                 {isActive && (
                   <div className="d-flex align-items-center ms-3" style={{ maxWidth: "100px" }}>
                     <em className="text-muted small">{day.narrative}</em>
