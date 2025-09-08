@@ -6,3 +6,36 @@
   display: block;
   color: #000; /* siguro që nuk është e bardhë mbi sfond të bardhë */
 }
+
+.max-temp {
+  display: flex;
+  align-items: flex-start; /* E ngre gjithçka lart */
+  gap: 20px;
+}
+
+.celsius {
+  font-size: 25px;
+  margin: 0;
+  line-height: 1;
+  position: relative;
+  top: -15px; /* ngritje lart – rregulloje sipas nevojës */
+}
+
+
+.wind {
+  display: flex;
+  align-items: center; /* ikonën dhe tekstin në një vijë */
+  font-size: 16px;
+  margin-top: 2px; /* Mund ta rregullosh për balancë vizuale */
+}
+
+.wind img {
+  margin-right: 6px;
+  width: 24px;
+  height: 24px;
+}
+
+.wind p {
+  margin: 0;
+  padding-top: 2px;
+}

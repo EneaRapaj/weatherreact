@@ -42,7 +42,9 @@ function LocationBox({ city, country, weather, onChangeBackground,narrative }) {
         windUnit={windUnit}
       />
       <FirstConatainer weather={weather} />
-      <Result weather={weather} />
+      <Result weather={weather} 
+        tempUnit={tempUnit}
+        windUnit={windUnit}/>
       <Setting onUnitChange={handleUnitChange} />
 
       
